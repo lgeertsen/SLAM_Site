@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TournamentsController@index');
+
+Route::get('/tournaments', 'TournamentsController@index');
+Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
