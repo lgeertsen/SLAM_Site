@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Tournament extends Resource
+class Participant extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,7 @@ class Tournament extends Resource
     {
         return [
           'id' => $this->id,
-          'sport' => $this->sport,
-          'date' => $this->date
+          'user' => new User($this->user)
         ];
     }
 }

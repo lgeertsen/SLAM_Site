@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tournament;
-use App\Http\Resources\Tournament as TournamentResource;
+use App\Http\Resources\TournamentResource;
 use App\Http\Resources\TournamentCollection;
 
 
