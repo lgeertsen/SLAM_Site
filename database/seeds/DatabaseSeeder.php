@@ -10,7 +10,11 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run(){
-      factory(App\Tournament::class, 1)->create();
-      factory(App\Participant::class, 20)->create();
+      $tournaments = factory(App\Tournament::class, 5)->create();
+      $tournaments->each(function($tournament) {
+        factory(App\Participant::class, 20)->create([
+          'tournament_id' => $tournament->id
+        ]);
+      });
     }
 }
