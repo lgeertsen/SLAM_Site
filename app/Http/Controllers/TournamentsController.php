@@ -23,9 +23,8 @@ class TournamentsController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-  public function create()
-  {
-    //
+  public function create() {
+    return view('tournaments.create');
   }
 
   /**
@@ -34,9 +33,18 @@ class TournamentsController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
-  public function store(Request $request)
-  {
-    //
+  public function store(Request $request) {
+    $this->validate($request, [
+      'sport' => 'required',
+      'date' => 'required',
+    ]);
+
+    $ride = Ride::create([
+      'sport' => request('sport'),
+      'date' => request('date'),
+    ]);
+
+    return redirect('/tournaments');
   }
 
   /**

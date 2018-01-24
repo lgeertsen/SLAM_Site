@@ -6,6 +6,9 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="">
           <h1>Tournaments</h1>
+          <a class="btn btn-success btn-xs" href="/tournaments/create">
+            Create Tournament
+          </a>
         </div>
 
         @foreach ($tournaments as $tournament)
