@@ -9,7 +9,7 @@
 
 define('LARAVEL_START', microtime(true));
 
-header("Access-Control-Allow-Origin: http://localhost:8000");
+header("Access-Control-Allow-Origin: *");
 
 /*
 |--------------------------------------------------------------------------
