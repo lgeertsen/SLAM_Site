@@ -39,7 +39,7 @@ class TournamentsController extends Controller
       'date' => 'required',
     ]);
 
-    $ride = Ride::create([
+    Tournament::create([
       'sport' => request('sport'),
       'date' => request('date'),
     ]);

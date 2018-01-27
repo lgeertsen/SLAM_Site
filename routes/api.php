@@ -17,5 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/tournaments', 'APIController@tournaments');
+Route::get('/tournaments', 'APIController@tournaments')->middleware('auth:api');
 Route::get('/tournaments/{id}', 'APIController@tournament');
