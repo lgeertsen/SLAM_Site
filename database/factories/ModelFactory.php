@@ -23,22 +23,41 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 
 $factory->define(App\Tournament::class, function (Faker $faker) {
-  $sports = [ 'tennis', "pingpong", "volleyball", "basketball"];
+  $sports = ["tennis", "pingpong", "volleyball", "basketball", "rugby", "football"];
   $key = array_rand($sports, 1);
 
   return [
+    'name' => $faker->word . ' ' . $sports[$key] . ' tournament',
     'sport' => $sports[$key],
     'date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 1 months'),
+    'teamSize' => $faker->randomDigitNotNull
   ];
 });
 
-$factory->define(App\Participant::class, function (Faker $faker) {
+// $factory->define(App\Participant::class, function (Faker $faker) {
+//   return [
+//     'user_id' => function() {
+//       return factory('App\User')->create()->id;
+//     },
+//     'tournament_id' => function() {
+//       return 1;
+//     },
+//   ];
+// });
+
+$factory->define(App\Team::class, function (Faker $faker) {
+  return [
+    'name' => $faker->catchPhrase,
+    'tournament_id' => 1,
+    'size' => 2
+  ];
+});
+
+$factory->define(App\TeamMember::class, function (Faker $faker) {
   return [
     'user_id' => function() {
       return factory('App\User')->create()->id;
     },
-    'tournament_id' => function() {
-      return 1;
-    },
+    'team_id' => 1
   ];
 });

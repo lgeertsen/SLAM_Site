@@ -14,7 +14,8 @@
         @foreach ($tournaments as $tournament)
           <div class="panel panel-default">
             <div class="panel-body">
-              <h2>{{ $tournament->sport }} Tournament</h2>
+              <h2>{{ $tournament->name }}</h2>
+              <h5>{{ $tournament->sport }}</h5>
               <p>{{ $tournament->date }}</p>
               <a class="btn btn-primary btn-xs" href="{{ route('tournaments.show', ['tournament' => $tournament->id]) }}">
                 Show Tournament

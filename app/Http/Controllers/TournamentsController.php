@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Tournament;
 use Illuminate\Http\Request;
 
-class TournamentsController extends Controller
-{
+class TournamentsController extends Controller {
+
+  public function __construct() {
+    $this->middleware('auth')->except(['index', 'show']);
+  }
+
   /**
   * Display a listing of the resource.
   *
@@ -35,13 +39,17 @@ class TournamentsController extends Controller
   */
   public function store(Request $request) {
     $this->validate($request, [
+      'name' => 'required',
       'sport' => 'required',
       'date' => 'required',
+      'teamSize' => 'required',
     ]);
 
     Tournament::create([
+      'name' => request('name'),
       'sport' => request('sport'),
       'date' => request('date'),
+      'teamSize' => request('teamSize'),
     ]);
 
     return redirect('/tournaments');
@@ -54,12 +62,12 @@ class TournamentsController extends Controller
   * @return \Illuminate\Http\Response
   */
   public function show(tournament $tournament) {
-    $participants = $tournament->participants()->get();
+    $teams = $tournament->teams()->get();
 
     return view('tournaments.show', [
       'tournament' => $tournament,
-      'participants' => $participants,
-      'participantsCount' => $participants->count(),
+      'teams' => $teams,
+      'teamCount' => $teams->count(),
     ]);
   }
 

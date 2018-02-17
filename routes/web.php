@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'TournamentsController@index');
 
 Route::get('/tournaments', 'TournamentsController@index');
@@ -18,9 +20,8 @@ Route::get('/tournaments/create', 'TournamentsController@create');
 Route::post('/tournaments', 'TournamentsController@store');
 Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 
-Route::post('/tournaments/{tournament}/participate', 'ParticipantsController@store');
-
-
-Auth::routes();
+// Route::post('/tournaments/{tournament}/participate', 'ParticipantsController@store');
+Route::get('/tournaments/{tournament}/participate', 'TeamsController@create');
+Route::get('/vue/users', 'UsersController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');

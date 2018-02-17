@@ -11,6 +11,10 @@ class Tournament extends Model {
     return $this->hasMany(Participant::class, 'tournament_id');
   }
 
+  public function teams() {
+    return $this->hasMany(Team::class, 'tournament_id');
+  }
+
   public function addParticipant() {
     $attributes = ['user_id' => auth()->id()];
 
