@@ -7,11 +7,11 @@
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <title>Joyride</title>
+      <title>{{ config('app.name', 'Laravel') }}</title>
 
       <!-- Styles -->
       @include('layouts.css')
-      
+
       @include('layouts.IE')
 
   </head>

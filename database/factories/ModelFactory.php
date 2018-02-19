@@ -22,13 +22,21 @@ $factory->define(App\User::class, function (Faker $faker) {
   ];
 });
 
+
+$factory->define(App\Sport::class, function (Faker $faker) {
+  return [
+    'name' => 'tennis',
+    'slug' => 'tennis',
+  ];
+});
+
 $factory->define(App\Tournament::class, function (Faker $faker) {
   $sports = ["tennis", "pingpong", "volleyball", "basketball", "rugby", "football"];
   $key = array_rand($sports, 1);
 
   return [
-    'name' => $faker->word . ' ' . $sports[$key] . ' tournament',
-    'sport' => $sports[$key],
+    'name' => $faker->word . ' tournament',
+    'sport_id' => $sports[$key],
     'date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 1 months'),
     'teamSize' => $faker->randomDigitNotNull
   ];

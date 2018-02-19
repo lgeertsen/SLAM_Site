@@ -10,14 +10,14 @@
             Create Tournament
           </a>
         </div>
-
         @foreach ($tournaments as $tournament)
           <div class="panel panel-default">
             <div class="panel-body">
               <h2>{{ $tournament->name }}</h2>
-              <h5>{{ $tournament->sport }}</h5>
+              {{-- <h5>{{ $sports[$tournament->sport-1]->name }}</h5> --}}
+              <h5>{{ $tournament->sport->name }}</h5>
               <p>{{ $tournament->date }}</p>
-              <a class="btn btn-primary btn-xs" href="{{ route('tournaments.show', ['tournament' => $tournament->id]) }}">
+              <a class="btn btn-primary btn-xs" href="{{ $tournament->path() }}">
                 Show Tournament
               </a>
 

@@ -5,25 +5,22 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="">
-          <h1>{{ $tournament->name }}</h1>
+          <h1>{{ $team->name }}</h1>
           <h3>{{ $tournament->sport->name }}</h3>
-          <h3>{{ $tournament->date }}</h3>
         </div>
-
-        <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/participate" }}" class="btn btn-success">Participate</a>
 
         <div class="panel panel-default">
           <div class="panel-body">
 
-            <h3>Participants</h3>
+            <h3>Team Members</h3>
             {{-- <form method="post" action="{{ "/tournaments/{$tournament->id}/participate" }}">
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning btn-xs">Participate</button>
             </form> --}}
-            @foreach ($teams as $team)
+            @foreach ($teamMembers as $teamMember)
               <h6>
-                <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/{$team->id}" }}">
-                  {{ $team->name }}
+                <a href="{{ route('profile', ['user' => $teamMember->user_id]) }}">
+                  {{ $teamMember->user->name }}
                 </a>
               </h6>
             @endforeach

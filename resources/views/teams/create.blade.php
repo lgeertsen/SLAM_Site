@@ -2,14 +2,6 @@
 
 @section('customCSS')
   <link rel="stylesheet" href="{{ asset('css/jquery.atwho.min.css') }}" type="text/css" />
-  <style media="screen">
-    .azer {
-      width: 100%;
-      height: 100px;
-      border: 1px solid black;
-      padding: 10px;
-    }
-  </style>
 @endsection
 
 @section('customJS')
@@ -20,7 +12,7 @@
     $(id).atwho({
       at: "@",
       headerTpl: "<h4>Select a user</h4>",
-      insertTpl: "<b>${name}</b>",
+      insertTpl: "${name},${id}",
       displayTpl: "<li>${name} <small>${email}</small></li>",
       // data:['Peter', 'Tom', 'Anne']
       delay: 750,
@@ -31,14 +23,17 @@
           });
         },
         beforeInsert: function(value, $li) {
-          return value;
+          console.log(this.id);
+          let values = value.split(",");
+          let name = '<b>' + values[0] + '</b>';
+          $("#" + this.id + "id").val(values[1]);
+          $("#" + this.id + "name").val(values[0]);
+          $("#" + this.id).blur();
+          $("#" + this.id).attr("contenteditable", false);
+          return name;
         }
       }
-    });//.keypress(function(e){ return e.which != 13; });
-  }
-
-  function check(e) {
-    console.log(e.target.value);
+    }).keydown(function(e){ return e.which != 13; });
   }
   </script>
 @endsection
@@ -51,7 +46,7 @@
         <div class="panel-heading">Create a your Team</div>
 
         <div class="panel-body">
-          <form action="/tournaments" method="post">
+          <form action="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}" }}" method="post">
             {{ csrf_field() }}
             <div class="form-group">
               <label for="name">Team name:</label>
@@ -60,10 +55,12 @@
 
             <div class="form-group">
               <label for="players[]">Player 1:</label>
-              <div class="form-control" id="player1" name="players[]" required><b>{{ auth()->user()->name }}</b></div>
+              <div class="form-control" id="player1"><b>{{ auth()->user()->name }}</b></div>
+              <input type="text" name="playersId[]" value="{{auth()->user()->id}}" required/>
+              <input type="text" name="players[]" value="{{auth()->user()->name}}" required/>
             </div>
 
-            <h5>You can use <code>@</code> to find players</h5>
+            <h5>You can use <code>@</code> to find your friends</h5>
 
             @for($i=2; $i <= $size; $i++)
               {{-- <div class="form-group">
@@ -73,7 +70,9 @@
               {{-- <player :index={{$i}}></player> --}}
               <div class="form-group">
                 <label for="players[]">Player {{$i}}:</label>
-                <div contentEditable="true" class="form-control" id="player{{$i}}" name="players[]"></div>
+                <div contentEditable="true" class="form-control" id="player{{$i}}"></div>
+                <input type="text" id="player{{$i}}id" name="playersId[]"/>
+                <input type="text" id="player{{$i}}name" name="players[]" required/>
               </div>
             @endfor
 

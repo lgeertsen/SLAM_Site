@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Sport;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +17,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      \View::composer('*', function($view) {
+        $sports = \Cache::rememberForever('sports', function() {
+          return Sport::all();
+        });
+
+        $view->with('sports', $sports);
+      });
+
       Schema::defaultStringLength(191);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Sport;
 use App\Tournament;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,15 @@ class TournamentsController extends Controller {
   *
   * @return \Illuminate\Http\Response
   */
-  public function index() {
-    $tournaments = Tournament::latest()->get();
+  public function index(Sport $sport) {
 
+    if($sport->exists) {
+      $tournaments = Tournament::latest()->where('sport_id', $sport->id)->get();
+    } else {
+      $tournaments = Tournament::latest()->get();
+    }
+
+    // dd($tournaments);
     return view('tournaments.index', compact('tournaments'));
   }
 
@@ -61,7 +68,7 @@ class TournamentsController extends Controller {
   * @param  \App\tournament  $tournament
   * @return \Illuminate\Http\Response
   */
-  public function show(tournament $tournament) {
+  public function show($sport, Tournament $tournament) {
     $teams = $tournament->teams()->get();
 
     return view('tournaments.show', [
