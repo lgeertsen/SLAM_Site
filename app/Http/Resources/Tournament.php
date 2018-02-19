@@ -16,7 +16,8 @@ class Tournament extends Resource
     {
         return [
           'id' => $this->id,
-          'sport' => $this->sport,
+          'name' => $this->name,
+          'sport' => $this->sport->name,
           'date' => $this->date
         ];
     }
