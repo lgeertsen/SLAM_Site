@@ -14,7 +14,7 @@ class APIController extends Controller {
   public function user(Request $request) {
     UserResource::withoutWrapping();
 
-    return new UserResource(User::where('email', $request->query('email')));
+    return new UserResource(User::where('email', $request->query('email'))->first());
   }
 
   public function tournaments() {
