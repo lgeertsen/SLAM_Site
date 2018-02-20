@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('/user', 'APIController@user');
 
 Route::get('/tournaments', 'APIController@tournaments'); //->middleware('auth:api');
 Route::get('/tournaments/{id}', 'APIController@tournament'); //->middleware('auth:api');
