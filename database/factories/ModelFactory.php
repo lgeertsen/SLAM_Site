@@ -27,6 +27,7 @@ $factory->define(App\Sport::class, function (Faker $faker) {
   return [
     'name' => 'tennis',
     'slug' => 'tennis',
+    'url' => '',
   ];
 });
 

@@ -1,0 +1,8 @@
+#content {
+  margin-top: 56px;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+  background: #fff !important;
+  box-shadow: 0 0px 5px rgba(100, 100, 100, 0.4);
+}

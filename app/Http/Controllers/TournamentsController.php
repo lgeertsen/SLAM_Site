@@ -21,12 +21,17 @@ class TournamentsController extends Controller {
 
     if($sport->exists) {
       $tournaments = Tournament::latest()->where('sport_id', $sport->id)->get();
+      return view('tournaments.index', [
+        'tournaments' => $tournaments,
+        'sport' => $sport->name,
+        'url' => $sport->url
+      ]);
     } else {
       $tournaments = Tournament::latest()->get();
+      return view('tournaments.index', compact('tournaments'));
     }
 
     // dd($tournaments);
-    return view('tournaments.index', compact('tournaments'));
   }
 
   /**
