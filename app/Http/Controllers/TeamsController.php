@@ -14,9 +14,9 @@ class TeamsController extends Controller {
   }
 
   public function create(Sport $sport, Tournament $tournament) {
+    $tournament = Tournament::where('id', $tournament->id)->with('sport')->first();
     return view('teams.create', [
-      'tournament' => $tournament,
-      'size' => $tournament->teamSize,
+      'tournament' => $tournament
     ]);
   }
 

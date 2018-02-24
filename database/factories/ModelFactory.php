@@ -39,7 +39,8 @@ $factory->define(App\Tournament::class, function (Faker $faker) {
     'name' => $faker->word . ' tournament',
     'sport_id' => $sports[$key],
     'date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 1 months'),
-    'teamSize' => $faker->randomDigitNotNull
+    'teamSize' => $faker->randomDigitNotNull,
+    'description' => $faker->paragraph($nbSentences = 10, $variableNbSentences = true),
   ];
 });
 

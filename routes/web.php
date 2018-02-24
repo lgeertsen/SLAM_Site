@@ -18,7 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tournaments', 'TournamentsController@index');
 Route::get('/tournaments/{sport}', 'TournamentsController@index');
-Route::get('/tournaments/create', 'TournamentsController@create');
+Route::get('/tournament/create', 'TournamentsController@create');
 Route::post('/tournaments', 'TournamentsController@store');
 Route::get('/tournaments/{sport}/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 // Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
@@ -31,3 +31,5 @@ Route::post('/tournaments/{sport}/{tournament}', 'TeamsController@store');
 Route::get('/tournaments/{sport}/{tournament}/{team}', 'TeamsController@show');
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
+
+Route::post('/users/{user}/avatar', 'UserAvatarsController@store')->middleware('auth')->name('avatar');

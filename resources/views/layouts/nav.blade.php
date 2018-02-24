@@ -18,12 +18,12 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           @foreach ($sports as $sport)
-            <a class="dropdown-item" href="{{ '/tournaments/'.$sport->slug }}">{{ $sport->name }}</a>
+            <a class="dropdown-item" href="{{ '/tournaments/'.$sport->slug }}">{{ ucwords($sport->name) }}</a>
           @endforeach
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tournaments/create">
+        <a class="nav-link" href="/tournament/create">
           Create Tournament
         </a>
       </li>

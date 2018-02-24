@@ -72,7 +72,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ $tournament->name }}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{ $tournament->sport->name }}</h6>
-                  <h6>{{ $tournament->date }}</h6>
+                  <h6>{{ date('D d F', strtotime($tournament->date)) }}</h6>
 
                 </div>
                 <div class="card-footer">

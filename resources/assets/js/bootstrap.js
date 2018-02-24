@@ -10,8 +10,15 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    // require('bootstrap-sass');
 } catch (e) {}
+
+window.Vue = require('vue');
+
+Vue.prototype.authorize = function(handler) {
+  let user = window.App.user;
+  return user ? handler(user) : false;
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -51,3 +58,9 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+window.events = new Vue();
+
+window.flash = function(message) {
+  window.events.$emit('flash', message);
+};

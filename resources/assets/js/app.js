@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,7 +14,10 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('flash', require('./components/Flash.vue'));
+Vue.component('team-form', require('./components/TeamForm.vue'));
 Vue.component('player', require('./components/Player.vue'));
+Vue.component('avatar-form', require('./components/AvatarForm.vue'));
 
 Vue.component(
     'passport-clients',

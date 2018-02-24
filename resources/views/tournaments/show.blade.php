@@ -41,25 +41,36 @@
     .card-footer {
       text-align: right;
     }
+    .flex-1 {
+      flex: 1;
+    }
+    h2 {
+      font-family: 'Raleway', sans-serif;
+    }
   </style>
 @endsection
 
 @section('content')
   <div id="header">
     <div class="">
-      <h1>{{ $tournament->name }}</h1>
+      <h1>{{ ucwords($tournament->name) }}</h1>
     </div>
   </div>
 
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-10 offset-md-2">
-        <div class="">
-          <h3>{{ $tournament->sport->name }}</h3>
-          <h3>{{ $tournament->date }}</h3>
-        </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-8">
+        <div class="d-flex align-items-center">
+          <div class="flex-1">
+            <h2>{{ ucwords($tournament->sport->name) }} Tournament</h2>
+            <h5>{{ date('D d F', strtotime($tournament->date)) }}</h5>
+          </div>
+          <div class="">
 
-        <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/participate" }}" class="btn btn-success">Participate</a>
+            <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a>
+          </div>
+        </div>
+        <p>{{ $tournament->description }}</p>
 
         <div class="panel panel-default">
           <div class="panel-body">
@@ -69,13 +80,29 @@
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning btn-xs">Participate</button>
             </form> --}}
+            <ul id="accordion" class="list-group">
             @foreach ($teams as $team)
-              <h6>
-                <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/{$team->id}" }}">
-                  {{ $team->name }}
-                </a>
-              </h6>
+              <li class="list-group-item">
+                <h6>
+                  {{-- <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/{$team->id}" }}">
+                    {{ $team->name }}
+                  </a> --}}
+                  <button class="btn btn-outline-danger"
+                  data-toggle="collapse"
+                  data-target="#team{{$team->id}}"
+                  aria-expanded="true"
+                  aria-controls="team{{$team->id}}">{{$team->name}}</button>
+                </h6>
+                <div id="team{{$team->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                  <ul>
+                    @foreach ($team->members as $member)
+                      <li>{{ $member->user->name }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+              </li>
             @endforeach
+          </ul>
           </div>
         </div>
 

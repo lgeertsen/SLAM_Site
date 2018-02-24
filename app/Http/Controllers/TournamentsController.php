@@ -20,14 +20,14 @@ class TournamentsController extends Controller {
   public function index(Sport $sport) {
 
     if($sport->exists) {
-      $tournaments = Tournament::latest()->where('sport_id', $sport->id)->get();
+      $tournaments = Tournament::latest()->where('sport_id', $sport->id)->with('sport')->get();
       return view('tournaments.index', [
         'tournaments' => $tournaments,
         'sport' => $sport->name,
         'url' => $sport->url
       ]);
     } else {
-      $tournaments = Tournament::latest()->get();
+      $tournaments = Tournament::latest()->with('sport')->get();
       return view('tournaments.index', compact('tournaments'));
     }
 
@@ -52,16 +52,18 @@ class TournamentsController extends Controller {
   public function store(Request $request) {
     $this->validate($request, [
       'name' => 'required',
-      'sport' => 'required',
+      'sport_id' => 'required',
       'date' => 'required',
       'teamSize' => 'required',
+      'description' => 'required',
     ]);
 
     Tournament::create([
       'name' => request('name'),
-      'sport' => request('sport'),
+      'sport_id' => request('sport_id'),
       'date' => request('date'),
       'teamSize' => request('teamSize'),
+      'description' => request('description'),
     ]);
 
     return redirect('/tournaments');
@@ -74,7 +76,7 @@ class TournamentsController extends Controller {
   * @return \Illuminate\Http\Response
   */
   public function show($sport, Tournament $tournament) {
-    $teams = $tournament->teams()->get();
+    $teams = $tournament->teams()->with('members')->get();
 
     return view('tournaments.show', [
       'tournament' => $tournament,

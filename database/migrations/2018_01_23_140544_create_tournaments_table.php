@@ -19,6 +19,7 @@ class CreateTournamentsTable extends Migration
             $table->unsignedInteger('sport_id');
             $table->date('date');
             $table->unsignedInteger('teamSize');
+            $table->text('description');
             $table->timestamps();
         });
     }
