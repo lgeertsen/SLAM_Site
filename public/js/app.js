@@ -41429,35 +41429,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $(id + "group").show();
     },
     addGuest: function addGuest() {
-      console.log("addGuest");
-
       var id = "#player" + this.index;
       var self = this;
 
-      var div = document.createElement("div");
-      div.className = "playerBadge badge badge-success";
-      var img = document.createElement("img");
-      img.src = '/img/avatars/default.png';
-      img.width = 30;
-      img.height = 30;
-      div.appendChild(img);
-      var small = document.createElement("small");
-      small.innerHTML = "(GUEST)";
-      div.appendChild(small);
-      var span = document.createElement("div");
-      span.innerHTML = $(id).html();
-      div.appendChild(span);
-      var i = document.createElement("i");
-      i.className = "fas fa-times";
-      i.onclick = function () {
-        console.log("close");
-        self.showInput();
-      };
-      div.appendChild(i);
+      if ($(id).text().trim().length) {
+        console.log("addGuest");
 
-      $(id + "container").html(div);
+        var div = document.createElement("div");
+        div.className = "playerBadge badge badge-success";
+        var img = document.createElement("img");
+        img.src = '/img/avatars/default.png';
+        img.width = 30;
+        img.height = 30;
+        div.appendChild(img);
+        var small = document.createElement("small");
+        small.innerHTML = "(GUEST)";
+        div.appendChild(small);
+        var span = document.createElement("div");
+        span.innerHTML = $(id).text();
+        div.appendChild(span);
+        var i = document.createElement("i");
+        i.className = "fas fa-times";
+        i.onclick = function () {
+          console.log("close");
+          self.showInput();
+        };
+        div.appendChild(i);
 
-      this.hideInput();
+        $(id + "container").html(div);
+
+        $(id + "id").val(0);
+        $(id + "name").val($(id).text());
+
+        this.hideInput();
+      }
     },
     linkAt: function linkAt() {
       console.log("linkAt");
@@ -43205,7 +43210,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-outline-secondary",
+              staticClass: "btn btn-dark",
               attrs: { type: "button" },
               on: { click: _vm.addGuest }
             },
@@ -43217,7 +43222,7 @@ var render = function() {
     _vm._v(" "),
     _c("input", {
       attrs: {
-        type: "text",
+        type: "hidden",
         name: "playersId[]",
         id: "player" + _vm.index + "id",
         required: ""
@@ -43226,7 +43231,7 @@ var render = function() {
     _vm._v(" "),
     _c("input", {
       attrs: {
-        type: "text",
+        type: "hidden",
         name: "players[]",
         id: "player" + _vm.index + "name",
         required: ""
@@ -43258,7 +43263,16 @@ var render = function() {
       _vm._v(" "),
       _c(
         "form",
-        { attrs: { action: "", method: "post" } },
+        {
+          attrs: {
+            action:
+              "/tournaments/" +
+              _vm.tournament.sport.slug +
+              "/" +
+              _vm.tournament.id,
+            method: "post"
+          }
+        },
         [
           _vm._m(0),
           _vm._v(" "),
@@ -43288,7 +43302,7 @@ var render = function() {
                   expression: "this.user.id"
                 }
               ],
-              attrs: { type: "text", name: "playersId[]", required: "" },
+              attrs: { type: "hidden", name: "playersId[]", required: "" },
               domProps: { value: this.user.id },
               on: {
                 input: function($event) {
@@ -43309,7 +43323,7 @@ var render = function() {
                   expression: "this.user.name"
                 }
               ],
-              attrs: { type: "text", name: "players[]", required: "" },
+              attrs: { type: "hidden", name: "players[]", required: "" },
               domProps: { value: this.user.name },
               on: {
                 input: function($event) {

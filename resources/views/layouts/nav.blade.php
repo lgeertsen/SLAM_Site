@@ -10,9 +10,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/tournaments">All Tournaments</a>
+        <a class="nav-link" href="/tournaments">Tournaments</a>
       </li>
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sports
         </a>
@@ -21,7 +21,7 @@
             <a class="dropdown-item" href="{{ '/tournaments/'.$sport->slug }}">{{ ucwords($sport->name) }}</a>
           @endforeach
         </div>
-      </li>
+      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="/tournament/create">
           Create Tournament

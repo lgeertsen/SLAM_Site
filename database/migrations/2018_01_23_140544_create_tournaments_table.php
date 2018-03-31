@@ -16,9 +16,9 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('sport_id');
+            // $table->unsignedInteger('sport_id');
             $table->date('date');
-            $table->unsignedInteger('teamSize');
+            // $table->unsignedInteger('teamSize');
             $table->text('description');
             $table->timestamps();
         });

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tournament extends Model {
   protected $guarded = [];
 
-  // public function participants() {
-  //   return $this->hasMany(Participant::class, 'tournament_id');
-  // }
+  public function participants() {
+    return $this->hasMany(Participant::class, 'tournament_id');
+  }
 
   public function teams() {
     return $this->hasMany(Team::class, 'tournament_id');
@@ -28,6 +28,6 @@ class Tournament extends Model {
   // }
 
   public function path() {
-    return route('tournaments.show', [$this->sport->slug, $this->id]);
+    return route('tournaments.show', [$this->id]);
   }
 }

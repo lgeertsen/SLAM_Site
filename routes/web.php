@@ -17,10 +17,10 @@ Route::get('/', 'TournamentsController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/tournaments', 'TournamentsController@index');
-Route::get('/tournaments/{sport}', 'TournamentsController@index');
+// Route::get('/tournaments/{sport}', 'TournamentsController@index');
 Route::get('/tournament/create', 'TournamentsController@create');
 Route::post('/tournaments', 'TournamentsController@store');
-Route::get('/tournaments/{sport}/{tournament}', 'TournamentsController@show')->name('tournaments.show');
+Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 // Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 
 // Route::post('/tournaments/{tournament}/participate', 'ParticipantsController@store');

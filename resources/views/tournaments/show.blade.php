@@ -8,8 +8,8 @@
       width: 100%;
       height: 60vh;
       background-image: linear-gradient(transparent, #fff),
-                        url('{{$tournament->sport->url}}');
-      background-position: center;
+      url('https://images.unsplash.com/photo-1485908953667-cf6d88997642?ixlib=rb-0.3.5&s=32b5c9feaa9744b23a6003e4e85c3657&auto=format&fit=crop&w=1440&q=80');
+      background-position: center 35%;
       background-repeat: no-repeat;
       background-size: cover;
       /* padding-top: 50px; */
@@ -62,12 +62,12 @@
       <div class="col-sm-8">
         <div class="d-flex align-items-center">
           <div class="flex-1">
-            <h2>{{ ucwords($tournament->sport->name) }} Tournament</h2>
+            <h2>{{ ucwords($tournament->name) }} Tournament</h2>
             <h5>{{ date('D d F', strtotime($tournament->date)) }}</h5>
           </div>
           <div class="">
 
-            <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a>
+            <a href="{{ "/tournaments/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a>
           </div>
         </div>
         <p>{{ $tournament->description }}</p>
@@ -81,13 +81,13 @@
               <button type="submit" class="btn btn-warning btn-xs">Participate</button>
             </form> --}}
             <ul id="accordion" class="list-group">
-            @foreach ($teams as $team)
+            @foreach ($participants as $participant)
               <li class="list-group-item">
-                <h6>
+                <h6>{{$participant->user->name}}</h6>
                   {{-- <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/{$team->id}" }}">
                     {{ $team->name }}
                   </a> --}}
-                  <button class="btn btn-outline-danger"
+                  {{-- <button class="btn btn-outline-danger"
                   data-toggle="collapse"
                   data-target="#team{{$team->id}}"
                   aria-expanded="true"
@@ -99,7 +99,7 @@
                       <li>{{ $member->user->name }}</li>
                     @endforeach
                   </ul>
-                </div>
+                </div> --}}
               </li>
             @endforeach
           </ul>

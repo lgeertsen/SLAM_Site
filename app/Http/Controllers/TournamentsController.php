@@ -17,19 +17,19 @@ class TournamentsController extends Controller {
   *
   * @return \Illuminate\Http\Response
   */
-  public function index(Sport $sport) {
+  public function index() {
 
-    if($sport->exists) {
-      $tournaments = Tournament::latest()->where('sport_id', $sport->id)->with('sport')->get();
-      return view('tournaments.index', [
-        'tournaments' => $tournaments,
-        'sport' => $sport->name,
-        'url' => $sport->url
-      ]);
-    } else {
-      $tournaments = Tournament::latest()->with('sport')->get();
+    // if($sport->exists) {
+    //   $tournaments = Tournament::latest()->where('sport_id', $sport->id)->with('sport')->get();
+    //   return view('tournaments.index', [
+    //     'tournaments' => $tournaments,
+    //     'sport' => $sport->name,
+    //     'url' => $sport->url
+    //   ]);
+    // } else {
+      $tournaments = Tournament::latest()->get();
       return view('tournaments.index', compact('tournaments'));
-    }
+    // }
 
     // dd($tournaments);
   }
@@ -52,17 +52,17 @@ class TournamentsController extends Controller {
   public function store(Request $request) {
     $this->validate($request, [
       'name' => 'required',
-      'sport_id' => 'required',
+      // 'sport_id' => 'required',
       'date' => 'required',
-      'teamSize' => 'required',
+      // 'teamSize' => 'required',
       'description' => 'required',
     ]);
 
     Tournament::create([
       'name' => request('name'),
-      'sport_id' => request('sport_id'),
+      // 'sport_id' => request('sport_id'),
       'date' => request('date'),
-      'teamSize' => request('teamSize'),
+      // 'teamSize' => request('teamSize'),
       'description' => request('description'),
     ]);
 
@@ -75,13 +75,15 @@ class TournamentsController extends Controller {
   * @param  \App\tournament  $tournament
   * @return \Illuminate\Http\Response
   */
-  public function show($sport, Tournament $tournament) {
-    $teams = $tournament->teams()->with('members')->get();
+  public function show(Tournament $tournament) {
+    // $teams = $tournament->teams()->with('members')->get();
+    $participants = $tournament->participants()->get();
 
     return view('tournaments.show', [
       'tournament' => $tournament,
-      'teams' => $teams,
-      'teamCount' => $teams->count(),
+      // 'teams' => $teams,
+      'participants' => $participants,
+      'participantCount' => $participants->count(),
     ]);
   }
 

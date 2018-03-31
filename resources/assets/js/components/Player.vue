@@ -7,13 +7,13 @@
     <div v-bind:id="'player' + index + 'group'" class="input-group">
       <div contentEditable="true" class="form-control" v-bind:id="'player' + index" name="players[]"></div>
       <div class="input-group-append">
-        <button v-on:click="addGuest" class="btn btn-outline-secondary" type="button">Add</button>
+        <button v-on:click="addGuest" class="btn btn-dark" type="button">Add</button>
       </div>
     </div>
     <!-- <div contentEditable="true" class="form-control" id="inputor"></div> -->
 
-    <input type="text" name="playersId[]" v-bind:id="'player' + index + 'id'" required/>
-    <input type="text" name="players[]" v-bind:id="'player' + index + 'name'" required/>
+    <input type="hidden" name="playersId[]" v-bind:id="'player' + index + 'id'" required/>
+    <input type="hidden" name="players[]" v-bind:id="'player' + index + 'name'" required/>
   </div>
 </template>
 
@@ -55,35 +55,40 @@ export default {
     },
 
     addGuest() {
-      console.log("addGuest");
-
       let id = "#player" + this.index;
       let self = this;
 
-      let div = document.createElement("div");
-      div.className = "playerBadge badge badge-success";
-      let img = document.createElement("img");
-      img.src = '/img/avatars/default.png';
-      img.width = 30;
-      img.height = 30;
-      div.appendChild(img);
-      let small = document.createElement("small");
-      small.innerHTML = "(GUEST)";
-      div.appendChild(small);
-      let span = document.createElement("div");
-      span.innerHTML = $(id).html();
-      div.appendChild(span);
-      let i = document.createElement("i");
-      i.className = "fas fa-times";
-      i.onclick = function() {
-        console.log("close");
-        self.showInput();
+      if($(id).text().trim().length) {
+        console.log("addGuest");
+
+        let div = document.createElement("div");
+        div.className = "playerBadge badge badge-success";
+        let img = document.createElement("img");
+        img.src = '/img/avatars/default.png';
+        img.width = 30;
+        img.height = 30;
+        div.appendChild(img);
+        let small = document.createElement("small");
+        small.innerHTML = "(GUEST)";
+        div.appendChild(small);
+        let span = document.createElement("div");
+        span.innerHTML = $(id).text();
+        div.appendChild(span);
+        let i = document.createElement("i");
+        i.className = "fas fa-times";
+        i.onclick = function() {
+          console.log("close");
+          self.showInput();
+        }
+        div.appendChild(i);
+
+        $(id + "container").html(div);
+
+        $(id + "id").val(0);
+        $(id + "name").val($(id).text());
+
+        this.hideInput();
       }
-      div.appendChild(i);
-
-      $(id + "container").html(div);
-
-      this.hideInput();
     },
 
     linkAt() {

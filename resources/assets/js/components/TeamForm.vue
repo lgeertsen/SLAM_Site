@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <h3>Create a your Team</h3>
-      <form action="" method="post">
+      <form v-bind:action="'/tournaments/' + tournament.sport.slug + '/' + tournament.id" method="post">
         <div class="form-group">
           <label for="name">Team name:</label>
           <input type="text" class="form-control" id="name" name="name" value="" required>
@@ -16,8 +16,8 @@
               <div>{{ this.user.name }}</div>
             </div>
           </div>
-          <input type="text" name="playersId[]" v-model="this.user.id" required/>
-          <input type="text" name="players[]" v-model="this.user.name" required/>
+          <input type="hidden" name="playersId[]" v-model="this.user.id" required/>
+          <input type="hidden" name="players[]" v-model="this.user.name" required/>
         </div>
 
         <h5>You can use <code>@</code> to find your friends</h5>

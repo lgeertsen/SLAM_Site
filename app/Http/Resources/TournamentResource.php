@@ -17,9 +17,9 @@ class TournamentResource extends Resource
       return [
         'id' => $this->id,
         'name' => $this->name,
-        'sport' => $this->sport->name,
+        // 'sport' => $this->sport->name,
         'date' => $this->date,
-        'teams' => Team::collection($this->teams)
+        'teams' => Participant::collection($this->participants)
       ];
     }
 }

@@ -7,7 +7,7 @@
     height: 100%;
   }
   .container-fluid {
-    background-image: url('{{$sports[array_rand($sports->toArray(), 1)]->url}}');
+    background-image: url('https://images.unsplash.com/photo-1485908953667-cf6d88997642?ixlib=rb-0.3.5&s=32b5c9feaa9744b23a6003e4e85c3657&auto=format&fit=crop&w=1440&q=80');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

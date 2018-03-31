@@ -7,14 +7,9 @@
     #header {
       width: 100%;
       height: 60vh;
-      @if(isset($url))
       background-image: linear-gradient(transparent, #fff),
-                        url('{{$url}}');
-      @else
-        background-image: linear-gradient(transparent, #fff),
-                          url('{{$sports[array_rand($sports->toArray(), 1)]->url}}');
-      @endif
-      background-position: center;
+                        url('https://images.unsplash.com/photo-1485908953667-cf6d88997642?ixlib=rb-0.3.5&s=32b5c9feaa9744b23a6003e4e85c3657&auto=format&fit=crop&w=1440&q=80');
+      background-position: center 35%;
       background-repeat: no-repeat;
       background-size: cover;
       /* padding-top: 50px; */
@@ -71,7 +66,7 @@
               <div class="card col-sm-4">
                 <div class="card-body">
                   <h5 class="card-title">{{ $tournament->name }}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{ $tournament->sport->name }}</h6>
+                  {{-- <h6 class="card-subtitle mb-2 text-muted">{{ $tournament->sport->name }}</h6> --}}
                   <h6>{{ date('D d F', strtotime($tournament->date)) }}</h6>
 
                 </div>
@@ -79,7 +74,7 @@
                   <a class="btn btn-outline-info btn-sm" href="{{ $tournament->path() }}">
                     More info
                   </a>
-                  <a class="btn btn-outline-success btn-sm" href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/participate" }}">
+                  <a class="btn btn-outline-success btn-sm" href="{{ "/tournaments/{$tournament->id}/participate" }}">
                     Participate
                   </a>
                 </div>

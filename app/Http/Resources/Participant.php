@@ -15,8 +15,8 @@ class Participant extends Resource
     public function toArray($request)
     {
         return [
-          'id' => $this->id,
-          'user' => new User($this->user)
+          'id' => $this->user_id,
+          'name' => $this->user->name,
         ];
     }
 }

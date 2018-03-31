@@ -3,9 +3,17 @@
 @section('customCSS')
   <link rel="stylesheet" href="{{ asset('css/jquery.atwho.min.css') }}" type="text/css" />
   <style media="screen">
-    .container {
-      margin-top: 15px;
-      margin-bottom: 25px;
+    .container-fluid {
+      padding-top: 15px;
+      padding-bottom: 25px;
+      background-image: url('{{ $tournament->sport->url }}');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.7);
     }
     .playerBadge.badge {
       font-size: 15px;
@@ -30,47 +38,44 @@
   </style>
 @endsection
 
-{{-- @section('customJS')
-  <script src="{{ asset('js/jquery.atwho.js') }}" type="text/javascript"></script>
-  <script type="text/javascript">
-  var added = {};
-  for(var i = 2; i <= {{$size}}; i++) {
-    var id = "#player" + i;
-    $(id).atwho({
-      at: "@",
-      headerTpl: "<h4>Select a user</h4>",
-      insertTpl: "${name},${id}",
-      displayTpl: '<li><img src="${avatar_path}" width="30" height="30">${name} <small>${email}</small></li>',
-      // data:['Peter', 'Tom', 'Anne']
-      delay: 750,
-      callbacks: {
-        remoteFilter: function(query, callback) {
-          $.getJSON("/vue/users", {name: query}, function(usernames) {
-            callback(usernames)
-          });
-        },
-        beforeInsert: function(value, $li) {
-          console.log(this.id);
-          let values = value.split(",");
-          let name = '<b>' + values[0] + '</b>';
-          $("#" + this.id + "id").val(values[1]);
-          $("#" + this.id + "name").val(values[0]);
-          $("#" + this.id).blur();
-          $("#" + this.id).attr("contenteditable", false);
-          return name;
-        }
-      }
-    }).keydown(function(e){ return e.which != 13; });
-  }
-  </script>
-@endsection --}}
-
 @section('content')
-<div class="container">
+<div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <team-form :tournament="{{ $tournament }}" :user="{{ auth()->user() }}"></team-form>
+    <div class="col-sm-12 col-md-6">
+      {{-- <team-form :tournament="{{ $tournament }}" :user="{{ auth()->user() }}"></team-form> --}}
+      <div class="card">
+        <div class="card-body">
+          <h3>Create a your Team</h3>
+          <form action="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}" }}" method="post">
+            <div class="form-group">
+              <label for="name">Team name:</label>
+              <input type="text" class="form-control" id="name" name="name" value="" required>
+            </div>
 
+            <div class="form-group">
+              <label for="players[]">Player 1:</label>
+              <div id="player1">
+                <div class="playerBadge badge badge-info">
+                  <img src="{{ auth()->user()->avatar_path }}" width="30" height="30">
+                  <div>{{ auth()->user()->name }}</div>
+                </div>
+              </div>
+              <input type="hidden" name="playersId[]" value="{{ auth()->user()->id }}" required/>
+              <input type="hidden" name="players[]" value="{{ auth()->user()->name }}" required/>
+            </div>
+
+            <h5>You can use <code>@</code> to find your friends</h5>
+
+            @for ($i = 1; $i < $tournament->teamSize; $i++)
+              <player :index="{{$i}}"></player>
+            @endfor
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
