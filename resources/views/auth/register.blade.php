@@ -35,15 +35,28 @@
             <form class="" method="POST" action="{{ route('register') }}">
               {{ csrf_field() }}
 
-              <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name">Name</label>
-                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+              <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
+                <label for="firstName">First Name</label>
 
-                @if ($errors->has('name'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
-                  </span>
-                @endif
+                  <input id="firstName" type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" required autofocus>
+
+                  @if ($errors->has('firstName'))
+                    <span class="help-block">
+                      <strong>{{ $errors->first('firstName') }}</strong>
+                    </span>
+                  @endif
+              </div>
+
+              <div class="form-group{{ $errors->has('lastName') ? ' has-error' : '' }}">
+                <label for="lastName">Last Name</label>
+
+                  <input id="lastName" type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" required>
+
+                  @if ($errors->has('lastName'))
+                    <span class="help-block">
+                      <strong>{{ $errors->first('lastName') }}</strong>
+                    </span>
+                  @endif
               </div>
 
               <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

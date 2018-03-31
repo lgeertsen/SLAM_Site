@@ -16,7 +16,8 @@ class User extends Resource
     {
       return [
         'id' => $this->id,
-        'name' => $this->name
+        'firstName' => $this->firstName,
+        'lastName' => $this->lastName
       ];
     }
 }

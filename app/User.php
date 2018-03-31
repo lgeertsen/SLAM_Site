@@ -10,12 +10,16 @@ class User extends Authenticatable {
   use HasApiTokens, Notifiable;
 
   protected $fillable = [
-    'name', 'email', 'password', 'avatar_path',
+    'firstName', 'lastName', 'email', 'password', 'avatar_path',
   ];
 
   protected $hidden = [
     'password', 'remember_token',
   ];
+
+  public function fullName() {
+      return $this->firstName . ' ' . $this->lastName;
+  }
 
   public function getAvatarPathAttribute($avatar) {
     if(!$avatar) {

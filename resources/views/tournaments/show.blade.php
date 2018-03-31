@@ -83,7 +83,7 @@
             <ul id="accordion" class="list-group">
             @foreach ($participants as $participant)
               <li class="list-group-item">
-                <h6>{{$participant->user->name}}</h6>
+                <h6>{{$participant->user->fullName()}}</h6>
                   {{-- <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/{$team->id}" }}">
                     {{ $team->name }}
                   </a> --}}
