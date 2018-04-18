@@ -17,7 +17,8 @@ class Participant extends Resource
         return [
           'id' => $this->user_id,
           'firstName' => $this->user->firstName,
-          'lastName' => $this->user->lastName
+          'lastName' => $this->user->lastName,
+          'elo' => $this->user->elo,
         ];
     }
 }

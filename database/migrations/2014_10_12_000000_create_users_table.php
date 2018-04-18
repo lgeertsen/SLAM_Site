@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar_path')->nullable();
+            $table->integer('elo')->default(1000);
             $table->rememberToken();
             $table->timestamps();
         });

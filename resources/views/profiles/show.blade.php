@@ -46,6 +46,8 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <avatar-form :user="{{ $profileUser }}"></avatar-form>
+        <h1>{{$profileUser->fullName()}}</h1>
+        <h3>Elo: {{$profileUser->elo}}</h3>
       </div>
     </div>
   </div>
