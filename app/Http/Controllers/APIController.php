@@ -30,7 +30,7 @@ class APIController extends Controller {
   }
 
   public function results(Tournament $tournament, Request $request) {
-    Log::info(request('results'));
-    return request('results');
+    Log::info($request);
+    return $request;
   }
 }
