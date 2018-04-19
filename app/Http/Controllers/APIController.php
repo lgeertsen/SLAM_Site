@@ -29,7 +29,7 @@ class APIController extends Controller {
     return new TournamentResource(Tournament::find($id));
   }
 
-  public function results($id) {
-    Log::info('Showing user profile for user: ');
+  public function results($id, Request $request) {
+    Log::info($request);
   }
 }
