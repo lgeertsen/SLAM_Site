@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
+
 use App\Tournament;
 use App\User;
 use App\Http\Resources\TournamentResource;
@@ -28,6 +30,6 @@ class APIController extends Controller {
   }
 
   public function results($id) {
-    echo "sdfqqsdf";
+    Log::info('Showing user profile for user: ');
   }
 }
