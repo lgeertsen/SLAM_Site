@@ -31,5 +31,6 @@ class APIController extends Controller {
 
   public function results($id, Request $request) {
     Log::info($request->results);
+    echo $request;
   }
 }
