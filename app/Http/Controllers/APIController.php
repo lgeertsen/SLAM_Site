@@ -31,10 +31,18 @@ class APIController extends Controller {
 
   public function results($id, Request $request) {
     Log::info(request('results'));
+    $user;
+    foreach (request('results') as $obj) {
+      $user = User::find($obj->id);
+    }
+
+
+
     $tournament = Tournament::find($id);
 
     return response()->json([
-        'tournament' => $tournament
+        'tournament' => $tournament,
+        'user' => $user
     ]);
   }
 }
