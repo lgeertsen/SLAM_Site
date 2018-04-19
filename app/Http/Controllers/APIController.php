@@ -26,4 +26,8 @@ class APIController extends Controller {
 
     return new TournamentResource(Tournament::find($id));
   }
+
+  public function results($id) {
+    echo "sdfqqsdf";
+  }
 }

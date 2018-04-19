@@ -21,3 +21,4 @@ Route::get('/user', 'APIController@user');
 
 Route::get('/tournaments', 'APIController@tournaments'); //->middleware('auth:api');
 Route::get('/tournaments/{id}', 'APIController@tournament'); //->middleware('auth:api');
+Route::post('/tournaments/{id}', 'APIController@results'); //->middleware('auth:api');
