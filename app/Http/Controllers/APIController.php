@@ -32,9 +32,10 @@ class APIController extends Controller {
   public function results($id, Request $request) {
     $results = $request->input('results');
     Log::info($results);
-    // $user;
     foreach ($results as $result) {
       $user = User::find($result['id']);
+      $user->elo = $result['elo'];
+      $user->save();
     }
 
 
@@ -42,8 +43,7 @@ class APIController extends Controller {
     $tournament = Tournament::find($id);
 
     return response()->json([
-        'tournament' => $tournament,
-        'user' => $user
+        'tournament' => $tournament
     ]);
   }
 }
