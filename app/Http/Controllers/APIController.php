@@ -31,6 +31,8 @@ class APIController extends Controller {
 
   public function results(Tournament $tournament, Request $request) {
     Log::info($request);
-    return $request;
+    return response()->json([
+        'tournament' => $tournament
+    ]);
   }
 }
