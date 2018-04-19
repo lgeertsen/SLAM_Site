@@ -34,7 +34,7 @@ class APIController extends Controller {
     Log::info($results);
     // $user;
     foreach ($results as $result) {
-      $user = User::find($result->input('id'));
+      $user = User::find($result['id']);
     }
 
 
