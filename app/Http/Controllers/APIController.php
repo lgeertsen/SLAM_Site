@@ -29,10 +29,13 @@ class APIController extends Controller {
     return new TournamentResource(Tournament::find($id));
   }
 
-  public function results(Tournament $tournament, Request $request) {
+  public function results($id, Request $request) {
     Log::info($request);
+    $tournament = Tournament::find($id);
+    
     return response()->json([
-        'tournament' => $tournament
+        'tournament' => $tournament,
+        'request' => $request
     ]);
   }
 }
