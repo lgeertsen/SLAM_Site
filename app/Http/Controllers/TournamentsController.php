@@ -27,7 +27,7 @@ class TournamentsController extends Controller {
     //     'url' => $sport->url
     //   ]);
     // } else {
-      $tournaments = Tournament::latest()->get();
+      $tournaments = Tournament::latest()->where('finished', false)->get();
       return view('tournaments.index', compact('tournaments'));
     // }
 
@@ -77,7 +77,13 @@ class TournamentsController extends Controller {
   */
   public function show(Tournament $tournament) {
     // $teams = $tournament->teams()->with('members')->get();
-    $participants = $tournament->participants()->get();
+    $participants;
+
+    if ($tournament->finished) {
+      $participants = $tournament->participants()->orderBy('rankNb', 'asc')->get();
+    } else {
+      $participants = $tournament->participants()->get();
+    }
 
     return view('tournaments.show', [
       'tournament' => $tournament,

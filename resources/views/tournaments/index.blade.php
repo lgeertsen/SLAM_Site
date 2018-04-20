@@ -31,11 +31,13 @@
     .tournaments {
       margin-top: 20px;
     }
-    .row.card-deck {
+    .row {
       margin: 10px 0;
     }
-    .card.col-sm-4 {
+    .card {
       padding: 0;
+      margin: 10px 0;
+      height: 200px;
     }
     .card-footer {
       text-align: right;
@@ -46,11 +48,7 @@
 @section('content')
   <div id="header">
     <div class="">
-      @if (isset($sport))
-        <h1>{{ ucwords($sport) }}</h1>
-      @else
-        <h1>Tournaments</h1>
-      @endif
+      <h1>Tournaments</h1>
     </div>
   </div>
 
@@ -58,15 +56,12 @@
     <div class="row">
       <div class="col-md-10 offset-md-1 tournaments">
 
+        <div class="row justify-content-md-center">
           @foreach ($tournaments as $tournament)
-            @if ($loop->index % 3 == 0)
-
-            <div class="card-deck row justify-content-md-center">
-            @endif
-              <div class="card col-sm-4">
+            <div class="col-sm-4">
+              <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">{{ $tournament->name }}</h5>
-                  {{-- <h6 class="card-subtitle mb-2 text-muted">{{ $tournament->sport->name }}</h6> --}}
                   <h6>{{ date('D d F', strtotime($tournament->date)) }}</h6>
 
                 </div>
@@ -79,10 +74,9 @@
                   </a>
                 </div>
               </div>
-            @if ($loop->index % 3 == 2)
-              </div>
-            @endif
+            </div>
           @endforeach
+        </div>
       </div>
     </div>
   </div>

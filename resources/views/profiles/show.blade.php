@@ -38,17 +38,72 @@
     .avatarContainer .fa-upload {
       margin-right: 8px;
     }
+    .header {
+      height: 300px;
+      width: 100%;
+      padding: 20px 20%;
+      background-image: url("https://images.unsplash.com/photo-1519672808815-bdd52bb3bd41?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cdd94e68a0b91f05fbc68d4369ff1e2f&auto=format&fit=crop&w=1200&q=80");
+      background-position: center 20%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #3498db;
+      display: flex;
+      align-items: flex-end;
+    }
+    .profilePicture {
+      margin-right: 30px;
+    }
+    .profileTitle {
+      color: #fff;
+    }
+    .profileTitle h1,
+    .profileTitle h3 {
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    }
+    .card {
+      margin: 10px 0;
+      height: 200px;
+    }
+    .card-footer {
+      text-align: right;
+    }
   </style>
 @endsection
 
 @section('content')
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <avatar-form :user="{{ $profileUser }}"></avatar-form>
-        <h1>{{$profileUser->fullName()}}</h1>
-        <h3>Elo: {{$profileUser->elo}}</h3>
-      </div>
+  <div class="header">
+    <div class="profilePicture">
+      <avatar-form :user="{{ $profileUser }}"></avatar-form>
+    </div>
+    <div class="profileTitle">
+      <h1 class="display-4">{{$profileUser->fullName()}}</h1>
+      <h3>Elo: {{$profileUser->elo}}</h3>
     </div>
   </div>
-  @endsection
+  <div class="container">
+    @if (sizeof($elo) > 0)
+      <chart elo="{!! json_encode($elo) !!}"></chart>
+      <h3 class="display-4">Tournaments</h3>
+      <div class="row">
+        @foreach ($tournaments as $tournament)
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5>{{ $tournament->name }}</h5>
+                <h6>{{ $tournament->rank }}</h6>
+              </div>
+              <div class="card-footer">
+                <a class="btn btn-outline-info btn-sm" href="/tournaments/{{ $tournament->tournament_id }}">
+                  Results
+                </a>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    @endif
+    <div class="row">
+
+    </div>
+  </div>
+@endsection

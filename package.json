@@ -20,6 +20,8 @@
     },
     "dependencies": {
         "at.js": "^1.5.3",
-        "jquery.caret": "^0.3.1"
+        "chart.js": "^2.7.2",
+        "jquery.caret": "^0.3.1",
+        "vue-chartjs": "^3.3.1"
     }
 }

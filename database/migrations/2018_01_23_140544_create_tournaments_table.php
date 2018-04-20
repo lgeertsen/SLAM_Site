@@ -20,6 +20,7 @@ class CreateTournamentsTable extends Migration
             $table->date('date');
             // $table->unsignedInteger('teamSize');
             $table->text('description');
+            $table->boolean('finished')->default(false);
             $table->timestamps();
         });
     }

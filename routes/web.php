@@ -23,6 +23,8 @@ Route::post('/tournaments', 'TournamentsController@store');
 Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 // Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 
+Route::get('/leaderboard', 'LeaderboardsController@index');
+
 // Route::post('/tournaments/{tournament}/participate', 'ParticipantsController@store');
 Route::get('/tournaments/{sport}/{tournament}/participate', 'TeamsController@create');
 Route::get('/vue/users', 'UsersController@index');

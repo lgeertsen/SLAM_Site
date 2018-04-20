@@ -17,6 +17,11 @@ class CreateParticipantsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('tournament_id');
+            $table->boolean('played')->default(false);
+            $table->unsignedInteger('oldElo')->nullable();
+            $table->unsignedInteger('newElo')->nullable();
+            $table->string('rank')->nullable();
+            $table->unsignedInteger('rankNb')->nullable();
             $table->timestamps();
         });
     }

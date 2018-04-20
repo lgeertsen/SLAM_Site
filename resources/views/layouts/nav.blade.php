@@ -27,6 +27,11 @@
           Create Tournament
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/leaderboard">
+          Leaderboard
+        </a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <!-- Authentication Links -->

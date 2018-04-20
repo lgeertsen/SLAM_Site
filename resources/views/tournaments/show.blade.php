@@ -47,6 +47,36 @@
     h2 {
       font-family: 'Raleway', sans-serif;
     }
+    .list-group {
+      margin-bottom: 25px;
+    }
+    .list-group-item {
+      display: flex;
+      align-items: center;
+    }
+    .list-group-item > div {
+      display: inline-block;
+      padding: 0 10px;
+    }
+    .rank {
+      width: 15%;
+    }
+    .elo {
+      width: 8%;
+      text-align: center;
+    }
+    .flex {
+      flex: 1;
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+    .profileLink {
+      display: flex;
+      align-items: center;
+    }
   </style>
 @endsection
 
@@ -62,47 +92,74 @@
       <div class="col-sm-8">
         <div class="d-flex align-items-center">
           <div class="flex-1">
-            <h2>{{ ucwords($tournament->name) }} Tournament</h2>
+            <h2>{{ ucwords($tournament->name) }}</h2>
             <h5>{{ date('D d F', strtotime($tournament->date)) }}</h5>
           </div>
           <div class="">
 
-            <a href="{{ "/tournaments/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a>
+            @if(!$tournament->finished)
+              <a href="{{ "/tournaments/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a>
+              {{-- <form method="post" action="{{ "/tournaments/{$tournament->id}/participate" }}">
+              {{ csrf_field() }}
+              <button type="submit" class="btn btn-warning btn-xs">Participate</button>
+            </form> --}}
+            @endif
           </div>
         </div>
         <p>{{ $tournament->description }}</p>
 
         <div class="panel panel-default">
           <div class="panel-body">
-
-            <h3>Participants</h3>
-            {{-- <form method="post" action="{{ "/tournaments/{$tournament->id}/participate" }}">
-              {{ csrf_field() }}
-              <button type="submit" class="btn btn-warning btn-xs">Participate</button>
-            </form> --}}
-            <ul id="accordion" class="list-group">
-            @foreach ($participants as $participant)
-              <li class="list-group-item">
-                <h6>{{$participant->user->fullName()}}</h6>
-                  {{-- <a href="{{ "/tournaments/{$tournament->sport->slug}/{$tournament->id}/{$team->id}" }}">
-                    {{ $team->name }}
-                  </a> --}}
-                  {{-- <button class="btn btn-outline-danger"
-                  data-toggle="collapse"
-                  data-target="#team{{$team->id}}"
-                  aria-expanded="true"
-                  aria-controls="team{{$team->id}}">{{$team->name}}</button>
-                </h6>
-                <div id="team{{$team->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                  <ul>
-                    @foreach ($team->members as $member)
-                      <li>{{ $member->user->name }}</li>
-                    @endforeach
-                  </ul>
-                </div> --}}
-              </li>
-            @endforeach
-          </ul>
+            @if(!$tournament->finished)
+              <h3>Participants</h3>
+              <ul id="accordion" class="list-group">
+                @foreach ($participants as $participant)
+                  <li class="list-group-item">
+                    <a class="profileLink" href="/profiles/{{$participant->user_id}}">
+                      <img class="avatar" src="{{$participant->user->avatar_path}}" alt="">
+                      <h6>{{$participant->user->fullName()}}</h6>
+                    </a>
+                  </li>
+                @endforeach
+              </ul>
+            @else
+              <h3>Ranking</h3>
+              <ul id="accordion" class="list-group">
+                <li class="list-group-item list-group-item-dark">
+                  <div class="rank">
+                    <h6>RANK</h6>
+                  </div>
+                  <div class="flex">
+                    <h5>PLAYER</h5>
+                  </div>
+                  <div class="elo">
+                    <h6>OLD ELO</h6>
+                  </div>
+                  <div class="elo">
+                    <h6>NEW ELO</h6>
+                  </div>
+                </li>
+                @foreach ($participants as $participant)
+                  <li class="list-group-item">
+                    <div class="rank">
+                      <h6>{{$participant->rank}}</h6>
+                    </div>
+                    <div class="flex">
+                      <a class="profileLink" href="/profiles/{{$participant->user_id}}">
+                        <img class="avatar" src="{{$participant->user->avatar_path}}" alt="">
+                        <h5>{{$participant->user->fullName()}}</h5>
+                      </a>
+                    </div>
+                    <div class="elo">
+                      <span class="badge badge-danger badge-pill">{{$participant->oldElo}}</span>
+                    </div>
+                    <div class="elo">
+                      <span class="badge badge-primary badge-pill">{{$participant->newElo}}</span>
+                    </div>
+                  </li>
+                @endforeach
+              </ul>
+            @endif
           </div>
         </div>
 
