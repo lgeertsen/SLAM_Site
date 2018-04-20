@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -11,12 +12,12 @@ class UserAvatarsController extends Controller {
       'avatar' => ['required', 'image'],
     ]);
 
-    // $path = Storage::putFile('avatars', request->file('avatar'));
-    // echo $path;
+    $path = Storage::putFile('avatars', request()->file('avatar'));
+    //dd($path);
 
     auth()->user()->update([
-      'avatar_path' => request()->file('avatar')->store('avatars', 'public')
-      // 'avatar_path' => $path
+      // 'avatar_path' => request()->file('avatar')->store('avatars', 'public')
+      'avatar_path' => $path
     ]);
 
     return response([], 204);
