@@ -25,6 +25,6 @@ class User extends Authenticatable {
     if(!$avatar) {
       return '/img/avatars/default.png';
     }
-    return '/storage/' . $avatar;
+    return 'https://s3.eu-west-3.amazonaws.com/lee-letsgo/' . $avatar;
   }
 }
