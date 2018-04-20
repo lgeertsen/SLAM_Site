@@ -12,7 +12,9 @@ class UserAvatarsController extends Controller {
       'avatar' => ['required', 'image'],
     ]);
 
-    $path = Storage::putFile('avatars', request()->file('avatar'));
+    $path = Storage::putFileAs(
+      'avatars', $request->file('avatar'), $request->user()->id
+    );
     //dd($path);
 
     auth()->user()->update([
