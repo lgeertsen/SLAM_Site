@@ -13,7 +13,7 @@ class UserAvatarsController extends Controller {
     ]);
 
     $path = Storage::putFileAs(
-      'avatars', request()->file('avatar'), request()->user()->id
+      'avatars', request()->file('avatar'), auth()->user()->id
     );
     //dd($path);
 
