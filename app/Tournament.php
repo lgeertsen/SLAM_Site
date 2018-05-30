@@ -19,13 +19,13 @@ class Tournament extends Model {
     return $this->belongsTo(Sport::class);
   }
 
-  // public function addParticipant() {
-  //   $attributes = ['user_id' => auth()->id()];
-  //
-  //   if(! $this->participants()->where($attributes)->exists()) {
-  //     return $this->participants()->create($attributes);
-  //   }
-  // }
+  public function addParticipant() {
+    $attributes = ['user_id' => auth()->id()];
+
+    if(! $this->participants()->where($attributes)->exists()) {
+      return $this->participants()->create($attributes);
+    }
+  }
 
   public function path() {
     return route('tournaments.show', [$this->id]);

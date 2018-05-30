@@ -22,6 +22,7 @@ Route::get('/tournament/create', 'TournamentsController@create');
 Route::post('/tournaments', 'TournamentsController@store');
 Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
 // Route::get('/tournaments/{tournament}', 'TournamentsController@show')->name('tournaments.show');
+Route::post('/tournaments/{tournament}/participate', 'ParticipantsController@store');
 
 Route::get('/leaderboard', 'LeaderboardsController@index');
 

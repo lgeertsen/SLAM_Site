@@ -33,7 +33,7 @@ class APIController extends Controller {
 
   public function results($id, Request $request) {
     $results = $request->input('results');
-
+    dd($results);
     $tournament = Tournament::find($id);
     $tournament->finished = true;
     $tournament->save();

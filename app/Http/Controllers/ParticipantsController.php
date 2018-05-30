@@ -13,10 +13,10 @@ class ParticipantsController extends Controller {
 
   public function store(Tournament $tournament) {
     $tournament->addParticipant();
-
+    // dd($tournament);
     // Participant::create([
-    //   'user_id' => request('sport'),
-    //   'tournament_id' => request('date'),
+    //   'user_id' => auth()->user()->id,
+    //   'tournament_id' => $tournament->id,
     // ]);
 
     return redirect("/tournaments/{$tournament->id}");

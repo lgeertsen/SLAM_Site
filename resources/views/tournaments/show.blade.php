@@ -98,11 +98,11 @@
           <div class="">
 
             @if(!$tournament->finished)
-              <a href="{{ "/tournaments/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a>
-              {{-- <form method="post" action="{{ "/tournaments/{$tournament->id}/participate" }}">
+              {{-- <a href="{{ "/tournaments/{$tournament->id}/participate" }}" class="btn btn-outline-success">Participate</a> --}}
+              <form method="post" action="{{ "/tournaments/{$tournament->id}/participate" }}">
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning btn-xs">Participate</button>
-            </form> --}}
+            </form>
             @endif
           </div>
         </div>
